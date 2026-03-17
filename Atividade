@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>O Básico da Programação com Portugol</title>
+</head>
+<body>
+
+    <h1>O Básico da Programação com Portugol</h1>
+
+    <p>
+        O Portugol é uma forma simples de aprender programação.
+        Ele é inspirado em linguagens como Pascal e C e ajuda a entender a lógica de programação.
+    </p>
+
+    <h2>Estrutura do Portugol</h2>
+
+    <pre>
+Algoritmo "semnome"
+
+Var
+// Declaração das variáveis
+
+Inicio
+// Comandos do programa
+
+Fimalgoritmo
+    </pre>
+
+    <h2>Guardando uma informação</h2>
+
+    <ul>
+        <li>Escreval → Mostra um texto na tela</li>
+        <li>Leia → Guarda uma informação digitada pelo usuário</li>
+    </ul>
+
+    <p>
+        As variáveis devem ser declaradas na parte "Var".
+        Os tipos mais comuns são: Inteiro, Real e Caractere.
+    </p>
+
+    <h3>Pergunta</h3>
+    <p>
+        Por que é importante declarar corretamente uma variável em um algoritmo?
+    </p>
+
+</body>
+</html>
