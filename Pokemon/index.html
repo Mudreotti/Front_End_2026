@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Phonk Farm - Meu Pet Jelly</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('bg.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            transition: background-color 2s ease, filter 2s ease;
+        }
+
+        #camada-noite {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 40, 0.6);
+            opacity: 0;
+            transition: opacity 2s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body.noite #camada-noite {
+            opacity: 1;
+        }
+
+        #conteudo {
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        #barra-fome-container {
+            width: 250px;
+            height: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        #barra-fome {
+            width: 0%;
+            height: 100%;
+            background: #00ffcc;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        #b {
+            width: 300px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.5));
+            transition: transform 0.2s ease;
+        }
+        
+        #btn {
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+        }
+        
+        #btn:hover { transform: scale(1.1); }
+        #btn:active { transform: scale(0.9); }
+
+        #btn-clima {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            cursor: pointer;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            z-index: 3;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        #btn-clima:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        #novo-botao-foto {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            cursor: pointer;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            z-index: 3;
+            transition: background 0.3s ease;
+        }
+
+        #novo-botao-foto:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        #sobreposicao-foto {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        /* --- AQUI COMEÇA A 'EDIT DE PHONK' NA FOTO --- */
+        #sobreposicao-foto img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 10px;
+            
+            /* Inicia os loops de animação */
+            animation: 
+                phonk-shake 2s infinite ease-in-out,
+                phonk-glitch 2s infinite alternate,
+                neon-aura-farm 2s infinite alternate-reverse;
+                
+            /* Filtros base pesados */
+            filter: contrast(1.5) saturate(1.8) brightness(1.1);
+        }
+
+        /* Classe ativa para mostrar a sobreposição */
+        body.mostrando-foto #sobreposicao-foto {
+            display: flex;
+        }
+
+        /* --- KEYFRAMES DA 'EDIT DE PHONK' --- */
+
+        /* 1. Pulsação e "Quebra de Câmera" (Shake + Rítmico Fisheye-like) */
+        @keyframes phonk-shake {
+            0%, 100% { transform: scale(1) translate(0, 0); }
+            5% { transform: scale(1.05) translate(-2px, 1px) rotate(-1deg); }
+            10% { transform: scale(1.1) translate(3px, -2px) rotate(1deg); }
+            15% { transform: scale(1.05) translate(-1px, 1px); }
+            20%, 80% { transform: scale(1) translate(0, 0); }
+            85% { transform: scale(1.08) translate(2px, -1px); }
+            90% { transform: scale(1.12) translate(-3px, 2px) rotate(-1.5deg); }
+            95% { transform: scale(1.05) translate(1px, -1px); }
+        }
+
+        /* 2. Glitch Rítmico e Flashes (Cor e Contraste) */
+        @keyframes phonk-glitch {
+            0%, 80% { 
+                filter: contrast(1.5) saturate(1.8) brightness(1.1); 
+                opacity: 1;
+            }
+            82% { 
+                filter: contrast(2) saturate(2) brightness(1.5) hue-rotate(90deg);
+                opacity: 0.95;
+            }
+            84% { 
+                filter: contrast(1) saturate(1) brightness(1); 
+                opacity: 1;
+            }
+            86% { 
+                filter: contrast(2.5) saturate(3) brightness(2) hue-rotate(-90deg);
+                opacity: 0.98;
+            }
+            88%, 100% { 
+                filter: contrast(1.5) saturate(1.8) brightness(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* 3. A Aura Neon Pulsante e o 'Farm' (O brilho que pulsa rítmico) */
+        @keyframes neon-aura-farm {
+            0% { 
+                box-shadow: 
+                    0 0 15px 5px rgba(255, 0, 100, 0.6), /* Magenta/Rosa Phonk */
+                    0 0 30px 10px rgba(0, 255, 255, 0.4); /* Cyan Phonk */
+            }
+            15% {
+                box-shadow: 
+                    0 0 40px 15px rgba(255, 0, 200, 0.9), /* Flashes de Aura Rosa */
+                    0 0 70px 30px rgba(100, 255, 255, 0.6); /* Flashes de Aura Cyan */
+            }
+            30% { 
+                box-shadow: 
+                    0 0 10px 3px rgba(150, 0, 150, 0.5), /* Mínimo da aura */
+                    0 0 20px 7px rgba(50, 200, 200, 0.3);
+            }
+            85% {
+                box-shadow: 
+                    0 0 15px 5px rgba(255, 0, 100, 0.6),
+                    0 0 30px 10px rgba(0, 255, 255, 0.4);
+            }
+            90% {
+                box-shadow: 
+                    0 0 50px 20px rgba(255, 255, 255, 1), /* 'Farm' Flash Branco */
+                    0 0 80px 40px rgba(255, 255, 255, 0.8);
+            }
+            100% { 
+                box-shadow: 
+                    0 0 15px 5px rgba(255, 0, 100, 0.6),
+                    0 0 30px 10px rgba(0, 255, 255, 0.4);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="camada-noite"></div>
+    <button id="btn-clima">Mudar Clima</button>
+    <button id="novo-botao-foto">Foto secreta</button>
+
+    <div id="conteudo">
+        <div id="barra-fome-container">
+            <div id="barra-fome"></div>
+        </div>
+        <img id="b" src="b_n.png" alt="Pet"/>
+        <img id="btn" src="btn.png" alt="Alimentar"/>
+    </div>
+
+    <div id="sobreposicao-foto">
+        <img src="image_9.png" alt="Foto do Dono Phonk Edit"/>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
