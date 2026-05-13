@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exercícios JavaScript</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        div{
+            border: 1px solid gray;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        input, button, select{
+            margin-top: 10px;
+            display: block;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Exercícios JavaScript</h1>
+
+    <div>
+
+        <h2>Validador de CPF</h2>
+
+        <input type="text" id="cpf" placeholder="Digite o CPF">
+
+        <button onclick="validarCPF()">
+            Validar
+        </button>
+
+        <p id="resultadoCPF"></p>
+
+    </div>
+
+    <div>
+
+        <h2>Conversor de Temperatura</h2>
+
+        <input type="number" id="celsius" placeholder="Celsius">
+
+        <button onclick="converter()">
+            Converter
+        </button>
+
+        <p id="resultadoTemp"></p>
+
+    </div>
+
+    <div>
+
+        <h2>Média Escolar</h2>
+
+        <input type="text" id="nome" placeholder="Nome">
+
+        <input type="number" id="nota1" placeholder="Nota 1">
+
+        <input type="number" id="nota2" placeholder="Nota 2">
+
+        <input type="number" id="nota3" placeholder="Nota 3">
+
+        <button onclick="media()">
+            Calcular Média
+        </button>
+
+        <p id="resultadoMedia"></p>
+
+    </div>
+
+    <div>
+
+        <h2>Infinity Bank</h2>
+
+        <select id="bandeira">
+
+            <option value="0.02">Visa</option>
+            <option value="0.0185">Master</option>
+            <option value="0.03">Elo</option>
+
+        </select>
+
+        <input type="number" id="valor" placeholder="Valor da venda">
+
+        <input type="number" id="parcelas" placeholder="Parcelas">
+
+        <button onclick="calcularBanco()">
+            Calcular
+        </button>
+
+        <p id="resultadoBanco"></p>
+
+    </div>
+
+
+    <script>
+
+        function validarCPF(){
+
+            let cpf = document.getElementById("cpf").value;
+
+            if(cpf.length == 11){
+
+                document.getElementById("resultadoCPF").innerHTML = "CPF válido";
+
+            }else{
+
+                document.getElementById("resultadoCPF").innerHTML = "CPF inválido";
+
+            }
+
+        }
+
+        function converter(){
+
+            let c = Number(document.getElementById("celsius").value);
+
+            let f = (c * 9/5) + 32;
+
+            document.getElementById("resultadoTemp").innerHTML =
+            "Fahrenheit: " + f.toFixed(2);
+
+        }
+
+        function media(){
+
+            let nome = document.getElementById("nome").value;
+
+            let n1 = Number(document.getElementById("nota1").value);
+
+            let n2 = Number(document.getElementById("nota2").value);
+
+            let n3 = Number(document.getElementById("nota3").value);
+
+            let media = (n1 + n2 + n3) / 3;
+
+            if(media >= 7){
+
+                document.getElementById("resultadoMedia").innerHTML =
+                nome + " aprovado";
+
+            }else if(media >= 4){
+
+                document.getElementById("resultadoMedia").innerHTML =
+                nome + " exame";
+
+            }else{
+
+                document.getElementById("resultadoMedia").innerHTML =
+                nome + " reprovado";
+
+            }
+
+        }
+
+        function calcularBanco(){
+
+            let taxa = Number(document.getElementById("bandeira").value);
+
+            let valor = Number(document.getElementById("valor").value);
+
+            let parcelas = Number(document.getElementById("parcelas").value);
+
+            let valorTaxa = valor * taxa;
+
+            let juros = valor * (0.015 * parcelas);
+
+            let total = valor + valorTaxa + juros;
+
+            let parcela = total / parcelas;
+
+            document.getElementById("resultadoBanco").innerHTML =
+
+            "Total: R$ " + total.toFixed(2) +
+            "<br>Parcela: R$ " + parcela.toFixed(2);
+
+        }
+
+    </script>
+
+</body>
+
+</html>
